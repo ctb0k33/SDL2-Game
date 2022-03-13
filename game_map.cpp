@@ -36,7 +36,7 @@ void GameMap::LoadTiles(SDL_Renderer* screen) {
 	char file_img[50];
 	FILE* fp = NULL;
 	for (int i = 0; i < MAX_TILES; i++) {
-		sprintf_s(file_img, "map/%d.png", i);// chuyen doi file_img chi so i vao map
+		sprintf_s(file_img, "map/map good/%d.png", i);// chuyen doi file_img chi so i vao map
 		fopen_s(&fp, file_img, "rb");
 		if (fp == NULL) {
 			continue;
@@ -51,6 +51,7 @@ void GameMap::DrawMap(SDL_Renderer* screen) {
 
 	int y1 = 0;
 	int y2 = 0;
+
 	int map_x = 0;
 	int map_y = 0;
 	map_x = game_map_.start_x_ / TILE_SIZE;// index cua o anh
