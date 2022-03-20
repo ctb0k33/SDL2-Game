@@ -241,6 +241,7 @@ void MainObject::DoPlayer(Map& map_data) {
 	
 
 	if (come_back_time_ > 0) {
+
 		come_back_time_--;
 		if (come_back_time_ == 0) //Reset again
 		{
@@ -403,6 +404,9 @@ void MainObject::IncreaseMoney() {
 
 }
 
+void MainObject::DecreaseMoney() {
+	money_count -= 10;
+}
 
 void MainObject::UpdateImagePlayer(SDL_Renderer* des) {
 	if (on_ground_ == true) {
