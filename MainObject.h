@@ -41,10 +41,13 @@ public:
 	std::vector<BulletObject*> get_bullet_list()const { return p_bullet_list_; }
 	void HandleBullet(SDL_Renderer* des);
 	void RemoveBulelt(const int& idx);
-
+	void DecreaseMoney();
 	void IncreaseMoney();
-
-
+	int get_frame_width() const { return width_frame_; }
+	int get_frame_height()const { return height_frame_; }
+	void set_comeback_time(const int& cb_time) { come_back_time_ = cb_time; }
+	int get_comeback_time() { return come_back_time_; }
+	int GetMoneyCount()const { return money_count; }
 private:
 	int money_count;
 
@@ -54,6 +57,7 @@ private:
 
 	float x_pos_;
 	float y_pos_;
+	//float y_pos_;
 
 	int width_frame_;
 	int height_frame_;
