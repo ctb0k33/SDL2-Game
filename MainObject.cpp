@@ -21,6 +21,7 @@ MainObject::MainObject()
 	come_back_time_ = 0;
 	money_count = 0;
 }
+
 MainObject::~MainObject() {
 
 }
@@ -118,7 +119,7 @@ void MainObject::Show(SDL_Renderer* des) {
 	}
 }
 
-void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen) {
+void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen,Mix_Chunk*bullet_sound[3],Mix_Chunk*jump_sound[2]) {
 	if (events.type == SDL_KEYDOWN) {
 		switch (events.key.keysym.sym) {
 		case SDLK_RIGHT: {
@@ -153,11 +154,15 @@ void MainObject::HandleInputAction(SDL_Event events, SDL_Renderer* screen) {
 	if (events.type == SDL_MOUSEBUTTONDOWN) {
 		if (events.button.button == SDL_BUTTON_RIGHT) {
 			input_type_.jump_ = 1;
+			if (on_ground_ == true) {
+				Mix_PlayChannel(-1, jump_sound[0], 0);
+			}
 		}
 		else if (events.button.button == SDL_BUTTON_LEFT) {
 			BulletObject* p_bullet = new BulletObject();
 			p_bullet->set_bullet_type(BulletObject::SPHERE_BULLET);
 			p_bullet->LoadImgBullet(screen);
+			Mix_PlayChannel(-1, bullet_sound[0], 0);
 
 			if (status_ == WALK_LEFT) {
 				p_bullet->set_bullet_dir(BulletObject::DIR_LEFT);
@@ -211,7 +216,7 @@ void MainObject::RemoveBulelt(const int& idx) {
 		}
 	}
 }
-void MainObject::DoPlayer(Map& map_data) {
+void MainObject::DoPlayer(Map& map_data, Mix_Chunk* coin[1]) {
 	if(come_back_time_ ==0){
 		x_val_ = 0;
 		y_val_ += 0.8;
@@ -235,7 +240,7 @@ void MainObject::DoPlayer(Map& map_data) {
 			input_type_.jump_ = 0;
 		}
 
-		CheckToMap(map_data);
+		CheckToMap(map_data, coin);
 		CenterEntityOnMap(map_data);
 	}
 	
@@ -279,7 +284,7 @@ void MainObject::CenterEntityOnMap(Map& map_data) {
 	}
 }
 
-void MainObject::CheckToMap(Map& map_data) {
+void MainObject::CheckToMap(Map& map_data, Mix_Chunk* coin[1]) {
 	int x1 = 0;
 	int x2 = 0;
 
@@ -306,6 +311,7 @@ void MainObject::CheckToMap(Map& map_data) {
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY) {
 				map_data.tile[y1][x2] = 0;
 				map_data.tile[y2][x2] = 0;
+				Mix_PlayChannel(-1, coin[0], 0);
 				IncreaseMoney();
 			}
 			else {
@@ -323,6 +329,7 @@ void MainObject::CheckToMap(Map& map_data) {
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY) {
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y2][x1] = 0;
+				Mix_PlayChannel(-1, coin[0], 0);
 				IncreaseMoney();
 			}
 			else {
@@ -351,6 +358,7 @@ void MainObject::CheckToMap(Map& map_data) {
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY) {
 				map_data.tile[y2][x1] = 0;
 				map_data.tile[y2][x2] = 0;
+				Mix_PlayChannel(-1, coin[0], 0);
 				IncreaseMoney();
 			}
 			else {
@@ -371,6 +379,7 @@ void MainObject::CheckToMap(Map& map_data) {
 			if (val1 == STATE_MONEY || val2 == STATE_MONEY) {
 				map_data.tile[y1][x1] = 0;
 				map_data.tile[y1][x2] = 0;
+				Mix_PlayChannel(-1, coin[0], 0);
 				IncreaseMoney();
 			}
 			else {
