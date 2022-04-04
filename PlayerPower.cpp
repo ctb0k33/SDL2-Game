@@ -63,7 +63,7 @@ PlayerMoney::~PlayerMoney() {
 }
 
 void PlayerMoney::Init(SDL_Renderer* screen) {
-	bool ret = LoadImg("Debug//image//money_img.png", screen);
+	bool ret = LoadImg("Debug//image//4.png", screen);
 
 }
 
@@ -71,4 +71,43 @@ void PlayerMoney::Show(SDL_Renderer* screen) {
 	rect_.x = x_pos_;
 	rect_.y = y_pos_;
 	Render(screen);
+}
+
+
+BossHp::BossHp() {
+	hp_status = 5;
+	x_pos_ = 0;
+	y_pos_ = 0;
+}
+BossHp::~BossHp() {
+
+}
+
+void BossHp::Init(SDL_Renderer* screen) {
+	if (hp_status == 5) {
+		LoadImg("Debug//boss hp//5.png", screen);
+	}
+	else if (hp_status == 4) {
+		LoadImg("Debug//boss hp//4.png", screen);
+	}
+	else if (hp_status == 3) {
+		LoadImg("Debug//boss hp//3.png", screen);
+	}
+	else if (hp_status == 2) {
+		LoadImg("Debug//boss hp//2.png", screen);
+	}
+	else if (hp_status == 1) {
+		LoadImg("Debug//boss hp//1.png", screen);
+	}
+	else {
+		LoadImg("Debug//boss hp//0.png", screen);
+	}
+}
+
+void BossHp::Show(SDL_Renderer* screen) {
+	Render(screen);
+}
+
+void BossHp::Decrease() {
+	hp_status--;
 }
