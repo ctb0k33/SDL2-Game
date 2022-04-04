@@ -24,7 +24,23 @@ private:
 	std::vector<int> pos_list_;
 
 };
+class BossHp : public BaseObject {
+public:
+	BossHp();
+	~BossHp();
+	void set_hp_status(const int hp_status_) { hp_status = hp_status_; }
+	int get_hp_status() { return hp_status; }
+	void Show(SDL_Renderer* screen);
+	void Init(SDL_Renderer* screen);
+	void SetPos(const int& x, const int& y) { x_pos_ = x, y_pos_ = y; }
+	void Decrease();
+private:
+	int hp_status;
+	std::vector<int> status;
+	int x_pos_;
+	int y_pos_;
 
+};
 class PlayerMoney :public BaseObject {
 public:
 	PlayerMoney();
