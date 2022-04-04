@@ -8,10 +8,15 @@
 #include<SDL_image.h>
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
-
+#include<SDL_mixer.h>
 static SDL_Window* g_window = NULL;
 static SDL_Renderer* g_screen = NULL;
 static SDL_Event g_event;
+
+static Mix_Chunk* g_sound_bullet[3];
+static Mix_Chunk* g_sound_exp[2];
+static Mix_Chunk* g_coin[1];
+static Mix_Chunk* g_game_sound[1];
 
 // Screen
 
