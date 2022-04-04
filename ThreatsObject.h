@@ -47,15 +47,18 @@ public:
 	void SetAnimationPos(const int& pos_a, const int& pos_b) { animation_a_ = pos_a, animation_b_ = pos_b; }
 	void set_input_left(const int& ipleft) { input_type_.left_ = ipleft; };
 	void ImpMoveType(SDL_Renderer* screen);
-
 	std::vector<BulletObject*> get_bullet_list() const{ return bullet_list_; }
 	void set_bullet_list(const std::vector<BulletObject*>& bl_list) { bullet_list_ = bl_list; }
 	SDL_Rect GetRectFrame();
 
 	void InitBullet(BulletObject* p_bullet, SDL_Renderer* screen);
+	void InitBullet2(BulletObject* p_bullet, SDL_Renderer* screen);
 	void MakeBullet(SDL_Renderer* screen, const int& x_limit, const int& y_limit);
+	void MakeBullet2(SDL_Renderer* screen, const int& x_limit, const int& y_limit);
 
 	void RemoveBulelt(const int& idx);
+
+	int get_direct() { return direct; }
 private:
 
 	int map_x_;
@@ -75,7 +78,7 @@ private:
 	int animation_a_;//left
 	int animation_b_;//right
 	Input input_type_;
-
+	int direct;
 	std::vector<BulletObject*> bullet_list_;
 };
 
